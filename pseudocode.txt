@@ -1,0 +1,24 @@
+Write a factory function that creates a player and assigns "x" or "o" as the player's
+marker
+
+write a function to display players choices on the tik tak toe board and stores each
+choice to use for game status checks
+
+write a function that checks for the current status of the game - when each player
+makes a move the function should check several conditions to determine if a player
+has won, or if its a catscratch
+
+    this function will work by being comprised of three smaller functions:
+
+        checkRows function
+        checkColummns function
+        checkDiagonals function
+        checkCatscratch function
+
+    if all of these return false, then game continues to next players turn
+    if one function returns true, the result will be displayed and the winners
+    winCount will be updated
+
+write a function to display number of times a player has won...
+
+(optional) write a function that creates a basic AI to make the game unbeatable
