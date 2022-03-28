@@ -20,12 +20,6 @@ const player = (playerName, marker) => {
             return false
         };
     };  
-    // const makeMove = gameBoardArray => {
-
-    //     if (getValueAtIndex(x) === 0) {
-    //         return gameBoardArray.selectMove(x);
-    //     };
-    // };
     return {getName, getMarker, getWinCount, makeMove, checkMove};
 }
 
@@ -35,8 +29,19 @@ const gameBoard = (function() {
     for (i=0; i<gameBoardArray.length;i++) {
 
         const spaceNumber = document.createElement("div");
-        const body = document.getElementById("container");
-        spaceNumber.textContent = gameBoardArray[i];
+        const body = document.getElementById("gameBoard");
+        // spaceNumber.textContent = gameBoardArray[i];
+        spaceNumber.classList.add("gameTile")
+        spaceNumber.setAttribute("id", "tile"+i);
+
+        // create outlines for gameboard
+        if (i === 1 || i === 4 || i === 7 || i === 2 || i === 5 || i === 8) {
+            spaceNumber.classList.add("vertical")
+        };
+
+        if (i > 2) {
+            spaceNumber.classList.add("horizontal")
+        };
         body.appendChild(spaceNumber);
     }
 
