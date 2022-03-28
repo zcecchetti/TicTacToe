@@ -7,17 +7,26 @@ const player = (playerName, marker) => {
     const getMarker = () => marker;
     const getWinCount = () => winCount;
 
-    const selectMove = () => {
+    const makeMove = x => {
 
-        makeMove();
+        gameBoard[x] = marker; 
     };
 
-    const makeMove = () => {
+    const checkMove = x => {
 
+        if (gameBoard[x] === 0) {
+            return true
+        } else {
+            return false
+        };
+    };  
+    // const makeMove = gameBoardArray => {
 
-    };
-
-    return {getName, getMarker, getWinCount, selectMove};
+    //     if (getValueAtIndex(x) === 0) {
+    //         return gameBoardArray.selectMove(x);
+    //     };
+    // };
+    return {getName, getMarker, getWinCount, makeMove, checkMove};
 }
 
 const gameBoard = (function() {
@@ -34,21 +43,31 @@ const gameBoard = (function() {
     return gameBoardArray
 }());
 
-
-
 function createGame() {
 
-    // const playerOneName = prompt("what is player 1's name? ");
-    // const playerOneMarker = prompt("what is player 1's marker? ");
-    // console.log(playerOneName, playerOneMarker);
+    const playerOneName = prompt("player 1's name? ");
+    const playerOne = player(playerOneName, "X");
 
-    // const playerOne = player(playerOneName, playerOneMarker);
-    // console.log(playerOne.getName());
+    const playerTwoName = prompt("player 2's name? ");
+    const playerTwo = player(playerTwoName, "Y");
 
-    // const playerTwoName = prompt("what is player 2's name? ");
-    // const playerTwoMarker = prompt("what is player 2's marker? ");
+    for (moveCount = 0; moveCount < 8;) {
 
-    // const playerTwo = player(playerTwoName, playerTwoMarker);
+       let playerOneMove = prompt("where do you want to place your marker? ");
 
-    return
+       while (!playerOne.checkMove(playerOneMove)) {
+        playerOneMove = prompt("where do you want to change your marker to? ");
+       } 
+       playerOne.makeMove(playerOneMove);
+       moveCount++
+       console.log(moveCount);
+
+       let playerTwoMove = prompt("where do you want to place your marker ");
+       while (!playerTwo.checkMove(playerTwoMove)) {
+        playerTwoMove = prompt("where do you want to change your marker to? ");
+       } 
+       playerTwo.makeMove(playerTwoMove);
+       moveCount++
+       console.log(moveCount);
+    };
 };
