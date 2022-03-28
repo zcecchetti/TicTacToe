@@ -17,7 +17,7 @@ body {
 
 #header {
 
-    height: 100px;
+    height: 86px;
     font-size: 4rem;
     display: flex;
     justify-content: center;
@@ -39,6 +39,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 8px
 }
 
 #gameBoard {
@@ -108,4 +109,20 @@ body {
 #newGame:active {
 
     outline: 2px solid #ff9b58
+}
+
+#info>input {
+
+    height: 100%;
+    width: 500px;
+    background-color: #f9ebc7;
+    border: 0;
+    font-size: inherit;
+    text-align: center;
+}
+
+#info>input:active {
+
+    
+    border: 0 ;
 }

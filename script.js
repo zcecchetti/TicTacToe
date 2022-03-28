@@ -30,7 +30,6 @@ const gameBoard = (function() {
 
         const spaceNumber = document.createElement("div");
         const body = document.getElementById("gameBoard");
-        // spaceNumber.textContent = gameBoardArray[i];
         spaceNumber.classList.add("gameTile")
         spaceNumber.setAttribute("id", "tile"+i);
 
@@ -50,11 +49,16 @@ const gameBoard = (function() {
 
 function createGame() {
 
-    const playerOneName = prompt("player 1's name? ");
-    const playerOne = player(playerOneName, "X");
+    const nameOneInput = document.createElement("input");
+    nameOneInput.setAttribute("placeholder", "Player One Name")
+    const inputContainer = document.getElementById("info");
+    inputContainer.textContent = "";
+    inputContainer.appendChild(nameOneInput);
+    // const playerOneName = prompt("player 1's name? ");
+    // const playerOne = player(playerOneName, "X");
 
-    const playerTwoName = prompt("player 2's name? ");
-    const playerTwo = player(playerTwoName, "Y");
+    // const playerTwoName = prompt("player 2's name? ");
+    // const playerTwo = player(playerTwoName, "Y");
 
     for (moveCount = 0; moveCount < 8;) {
 
@@ -76,3 +80,7 @@ function createGame() {
        console.log(moveCount);
     };
 };
+
+// Create game when "New Game" is pressed
+const newGame = document.getElementById("newGame");
+newGame.addEventListener("click", createGame);
