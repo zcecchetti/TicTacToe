@@ -106,20 +106,48 @@ body {
     background-color: #b69077   
 }
 
-#newGame:active {
+button:hover {
+
+    background-color: #b69077   
+}
+
+button:active {
 
     outline: 2px solid #ff9b58
 }
 
-#info>input {
+#info>form {
 
     height: 100%;
     width: 500px;
+    border: 0;
+    font-size: inherit;
+    display: flex;
+}
+
+form>input {
+
+    height: 100%;
+    width: 400px;
     background-color: #f9ebc7;
     border: 0;
     font-size: inherit;
     text-align: center;
+    color: inherit;
 }
+
+form>button {
+
+    height: 100%;
+    width: 100px;
+    background-color: #d8b59d;
+    border: 0;
+    color: inherit;
+    font-size: inherit;
+    text-align: center;
+}
+
+
 
 #info>input:active {
 

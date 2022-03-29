@@ -49,36 +49,76 @@ const gameBoard = (function() {
 
 function createGame() {
 
-    const nameOneInput = document.createElement("input");
-    nameOneInput.setAttribute("placeholder", "Player One Name")
-    const inputContainer = document.getElementById("info");
-    inputContainer.textContent = "";
-    inputContainer.appendChild(nameOneInput);
-    // const playerOneName = prompt("player 1's name? ");
-    // const playerOne = player(playerOneName, "X");
+    const playerOneName = (function() {
+
+        const inputOneForm = document.createElement("form");
+        const nameOneInput = document.createElement("input");
+        nameOneInput.setAttribute("placeholder", "Player One Name");
+        nameOneInput.setAttribute("maxlength", "20");
+        const nameOneButton = document.createElement("button");
+        nameOneButton.textContent = "Enter";
+        inputOneForm.setAttribute("onsubmit", "return false");
+        const inputContainer = document.getElementById("info");
+        inputContainer.textContent = "";
+        inputOneForm.appendChild(nameOneInput);
+        inputOneForm.appendChild(nameOneButton);
+        inputContainer.appendChild(inputOneForm);
+
+        let playerName;
+        nameOneButton.addEventListener("click", () => {
+           
+            playerName = nameOneInput.value;
+            const playerOne = player(playerName, "X");
+            return playerOne
+        });
+        
+        
+    }());
+
+    // const inputOneForm = document.createElement("form");
+    // const nameOneInput = document.createElement("input");
+    // nameOneInput.setAttribute("placeholder", "Player One Name");
+    // nameOneInput.setAttribute("maxlength", "20");
+    // const nameOneButton = document.createElement("button");
+    // nameOneButton.textContent = "Enter";
+    // inputOneForm.setAttribute("onsubmit", "return false");
+    // const inputContainer = document.getElementById("info");
+    // inputContainer.textContent = "";
+    // inputOneForm.appendChild(nameOneInput);
+    // inputOneForm.appendChild(nameOneButton);
+    // inputContainer.appendChild(inputOneForm);
+
+    // let playerName;
+    // nameOneButton.addEventListener("click", () => {
+           
+    // playerName = nameOneInput.value;
+    // const playerOne = player(playerName, "X");
+    // console.log(playerOne.getMarker());
+    // })
+    
 
     // const playerTwoName = prompt("player 2's name? ");
     // const playerTwo = player(playerTwoName, "Y");
 
-    for (moveCount = 0; moveCount < 8;) {
+    // for (moveCount = 0; moveCount < 8;) {
 
-       let playerOneMove = prompt("where do you want to place your marker? ");
+    //    let playerOneMove = prompt("where do you want to place your marker? ");
 
-       while (!playerOne.checkMove(playerOneMove)) {
-        playerOneMove = prompt("where do you want to change your marker to? ");
-       } 
-       playerOne.makeMove(playerOneMove);
-       moveCount++
-       console.log(moveCount);
+    //    while (!playerOne.checkMove(playerOneMove)) {
+    //     playerOneMove = prompt("where do you want to change your marker to? ");
+    //    } 
+    //    playerOne.makeMove(playerOneMove);
+    //    moveCount++
+    //    console.log(moveCount);
 
-       let playerTwoMove = prompt("where do you want to place your marker ");
-       while (!playerTwo.checkMove(playerTwoMove)) {
-        playerTwoMove = prompt("where do you want to change your marker to? ");
-       } 
-       playerTwo.makeMove(playerTwoMove);
-       moveCount++
-       console.log(moveCount);
-    };
+    //    let playerTwoMove = prompt("where do you want to place your marker ");
+    //    while (!playerTwo.checkMove(playerTwoMove)) {
+    //     playerTwoMove = prompt("where do you want to change your marker to? ");
+    //    } 
+    //    playerTwo.makeMove(playerTwoMove);
+    //    moveCount++
+    //    console.log(moveCount);
+    // };
 };
 
 // Create game when "New Game" is pressed
