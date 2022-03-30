@@ -10,6 +10,7 @@ const player = (playerName, marker) => {
     const makeMove = x => {
 
         gameBoard[x] = marker; 
+        console.log(gameBoard);
     };
 
     const checkMove = x => {
@@ -100,37 +101,160 @@ function createGame() {
         }
     });
 
+    let moveCount = 1;
     function playerRounds(playerOne, playerTwo) {
 
+        /* find each tic tac toe space, kept in this function so the user can only
+        click on these tiles when the game is  being played */
 
-        for (moveCount = 0; moveCount < 8;) {
+        const tile0 = document.getElementById("tile0");
+        const tile1 = document.getElementById("tile1");
+        const tile2 = document.getElementById("tile2");
+        const tile3 = document.getElementById("tile3");
+        const tile4 = document.getElementById("tile4");
+        const tile5 = document.getElementById("tile5");
+        const tile6 = document.getElementById("tile6");
+        const tile7 = document.getElementById("tile7");
+        const tile8 = document.getElementById("tile8");
 
-            let tileChanged;
-            const turnDisplay = document.getElementById("turnDisplay");
-            turnDisplay.textContent = `${playerOne.getName()}'s turn`;
+        let playerOneMove;
+        let playerTwoMove;
+        let tileChanged;
 
-            let playerOneMove = prompt("where do you want to place your marker? ");
-        
-            while (!playerOne.checkMove(playerOneMove)) {
-                playerOneMove = prompt("where do you want to change your marker to? ");
+        tile0.addEventListener("click", () => {
+            
+            if (moveCount%2 === 1) {
+                if (playerOne.checkMove(0) === true) {
+                    changeTile(playerOne, 0, "X");
                 };
-            playerOne.makeMove(playerOneMove);
-            tileChanged = document.getElementById("tile"+playerOneMove);
-            tileChanged.textContent = "X"
-            moveCount++;
-            console.log(moveCount);
-
-            turnDisplay.textContent = `${playerTwo.getName()}'s turn`;
-        
-            let playerTwoMove = prompt("where do you want to place your marker ");
-            while (!playerTwo.checkMove(playerTwoMove)) {
-                playerTwoMove = prompt("where do you want to change your marker to? ");
+            } else {
+                if (playerTwo.checkMove(0) === true) {
+                    changeTile(playerTwo, 0, "O");
+                };
             };
-            playerTwo.makeMove(playerTwoMove);
-            tileChanged = document.getElementById("tile"+playerTwoMove);
-            tileChanged.textContent = "O"
-            moveCount++;
-            console.log(moveCount);
+        });
+        tile1.addEventListener("click", () => {
+            if (moveCount%2 === 1) {
+                if (playerOne.checkMove(1) === true) {
+                    changeTile(playerOne, 1, "X");
+                };
+            } else {
+                if (playerTwo.checkMove(1) === true) {
+                    changeTile(playerTwo, 1, "O");
+                };
+            };
+        });
+        tile2.addEventListener("click", () => {
+            if (moveCount%2 === 1) {
+                if (playerOne.checkMove(2) === true) {
+                    changeTile(playerOne, 2, "X");
+                };
+            } else {
+                if (playerTwo.checkMove(2) === true) {
+                    changeTile(playerTwo, 2, "O");
+                };
+            };
+        });
+        tile3.addEventListener("click", () => {
+            if (moveCount%2 === 1) {
+                if (playerOne.checkMove(3) === true) {
+                    changeTile(playerOne, 3, "X");
+                };
+            } else {
+                if (playerTwo.checkMove(3) === true) {
+                    changeTile(playerTwo, 3, "O");
+                };
+            };
+        });
+        tile4.addEventListener("click", () => {
+            if (moveCount%2 === 1) {
+                if (playerOne.checkMove(4) === true) {
+                    changeTile(playerOne, 4, "X");
+                };
+            } else {
+                if (playerTwo.checkMove(4) === true) {
+                    changeTile(playerTwo, 4, "O");
+                };
+            };
+        });
+        tile5.addEventListener("click", () => {
+            if (moveCount%2 === 1) {
+                if (playerOne.checkMove(5) === true) {
+                    changeTile(playerOne, 5, "X");
+                };
+            } else {
+                if (playerTwo.checkMove(5) === true) {
+                    changeTile(playerTwo, 5, "O");
+                };
+            };
+        });
+        tile6.addEventListener("click", () => {
+            if (moveCount%2 === 1) {
+                if (playerOne.checkMove(6) === true) {
+                    changeTile(playerOne, 6, "X");
+                };
+            } else {
+                if (playerTwo.checkMove(6) === true) {
+                    changeTile(playerTwo, 6, "O");
+                };
+            };
+        });
+        tile7.addEventListener("click", () => {
+            if (moveCount%2 === 1) {
+                if (playerOne.checkMove(7) === true) {
+                    changeTile(playerOne, 7, "X");
+                };
+            } else {
+                if (playerTwo.checkMove(7) === true) {
+                    changeTile(playerTwo, 7, "O");
+                };
+            };
+        });
+        tile8.addEventListener("click", () => {
+            if (moveCount%2 === 1) {
+                if (playerOne.checkMove(8) === true) {
+                    changeTile(playerOne, 8, "X");
+                };
+            } else {
+                if (playerTwo.checkMove(8) === true) {
+                    changeTile(playerTwo, 8, "O");
+                };
+            };
+        });
+
+        const turnDisplay = document.getElementById("turnDisplay");
+        
+        if (moveCount%2 === 1) {
+            turnDisplay.textContent = `${playerOne.getName()}'s turn`;
+        } else if (moveCount%2 === 0) {
+            turnDisplay.textContent = `${playerTwo.getName()}'s turn`;
+        };
+    };
+
+    // changes value stored in gameBoard array and then manipulates DOM
+    function changeTile(player, tileNumber, marker) {
+
+        player.makeMove(tileNumber);
+        tileChanged = document.getElementById("tile"+tileNumber);
+        tileChanged.textContent = marker
+        moveCount++;
+        const turnDisplay = document.getElementById("turnDisplay");
+        if (moveCount%2 === 1) {
+            turnDisplay.textContent = `${playerOne.getName()}'s turn`;
+        } else if (moveCount%2 === 0) {
+            turnDisplay.textContent = `${playerTwo.getName()}'s turn`;
+        };
+    }
+
+    function checkSelected(tile, player, playerMove) {
+
+        if (tile.classList === "unselected") {
+            tile.classList.add("selected");
+            tile.classList.remove("unselected");
+            player.makeMove(playerMove);
+            return true;
+        } else if (tile.classList === "selected") {
+            return false;
         };
     };
 };

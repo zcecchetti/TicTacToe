@@ -64,6 +64,16 @@ body {
     background-color: #f5d5bf;
 }
 
+.unselected:hover {
+
+    background-color: #f5d5bf;
+}
+
+.selected:hover {
+
+    background-color: #f9ebc7;    
+}
+
 #buttons {
 
     height: 50px;
