@@ -117,6 +117,21 @@ body {
     background-color: #b69077   
 }
 
+#playAgain {
+
+    height: 1.5rem;
+    width: 6rem;
+    border-radius: .25rem;
+    border: 0;
+    background-color: #d8b59d;
+    color: inherit;
+}
+
+#playAgain:hover {
+
+    background-color: #b69077   
+}
+
 button:hover {
 
     background-color: #b69077   

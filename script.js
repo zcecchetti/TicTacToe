@@ -58,6 +58,18 @@ function createGame() {
     let moveCount = 1;
     let playerOne;
     let playerTwo;
+    let noWin = true;
+
+    const newGame = document.getElementById("newGame");
+    const buttonsContainer = document.getElementById("buttons");
+    buttonsContainer.removeChild(newGame);
+
+    const playAgain = document.createElement("button");
+    playAgain.setAttribute("id", "playAgain");
+    playAgain.textContent = "Play Again";
+    buttonsContainer.appendChild(playAgain);
+    playAgain.addEventListener("click", playAnotherGame);
+
 
     const inputForm = document.createElement("form");
     // inputForm.setAttribute("id", "gameDataForm")
@@ -75,6 +87,19 @@ function createGame() {
     inputForm.appendChild(nameOneInput);
     inputForm.appendChild(nameButton);
     inputContainer.appendChild(inputForm);
+
+    // reset gameBoard
+    function playAnotherGame() {
+
+        for (i=0; i<gameBoard.length;i++) {
+            gameBoard[i] = 0;
+            const tileChanged = document.getElementById("tile"+i);
+            tileChanged.textContent = "";
+            noWin = true;
+            gameStatus = 0;
+            moveCount = 1;
+        }
+    };
 
     // Check to write to playerOne or playerTwo
     function checkPlayer() {
@@ -122,122 +147,31 @@ function createGame() {
         const tile8 = document.getElementById("tile8");
 
         tile0.addEventListener("click", () => {
-            
-            if (moveCount%2 === 1) {
-                if (playerOne.checkMove(0) === true) {
-                    changeTile(playerOne, 0, "X");
-                    checkWin(playerOne);
-                };
-            } else {
-                if (playerTwo.checkMove(0) === true) {
-                    changeTile(playerTwo, 0, "O");
-                    checkWin(playerTwo);
-                };
-            };
+            playerTurn(0);
         });
         tile1.addEventListener("click", () => {
-            if (moveCount%2 === 1) {
-                if (playerOne.checkMove(1) === true) {
-                    changeTile(playerOne, 1, "X");
-                    checkWin(playerOne);
-                };
-            } else {
-                if (playerTwo.checkMove(1) === true) {
-                    changeTile(playerTwo, 1, "O");
-                    checkWin(playerTwo);
-                };
-            };
+            playerTurn(1);
         });
         tile2.addEventListener("click", () => {
-            if (moveCount%2 === 1) {
-                if (playerOne.checkMove(2) === true) {
-                    changeTile(playerOne, 2, "X");
-                    checkWin(playerOne);
-                };
-            } else {
-                if (playerTwo.checkMove(2) === true) {
-                    changeTile(playerTwo, 2, "O");
-                    checkWin(playerTwo);
-                };
-            };
+            playerTurn(2);
         });
         tile3.addEventListener("click", () => {
-            if (moveCount%2 === 1) {
-                if (playerOne.checkMove(3) === true) {
-                    changeTile(playerOne, 3, "X");
-                    checkWin(playerOne);
-                };
-            } else {
-                if (playerTwo.checkMove(3) === true) {
-                    changeTile(playerTwo, 3, "O");
-                    checkWin(playerTwo);
-                };
-            };
+            playerTurn(3);
         });
         tile4.addEventListener("click", () => {
-            if (moveCount%2 === 1) {
-                if (playerOne.checkMove(4) === true) {
-                    changeTile(playerOne, 4, "X");
-                    checkWin(playerOne);
-                };
-            } else {
-                if (playerTwo.checkMove(4) === true) {
-                    changeTile(playerTwo, 4, "O");
-                    checkWin(playerTwo);
-                };
-            };
+            playerTurn(4);
         });
         tile5.addEventListener("click", () => {
-            if (moveCount%2 === 1) {
-                if (playerOne.checkMove(5) === true) {
-                    changeTile(playerOne, 5, "X");
-                    checkWin(playerOne);
-                };
-            } else {
-                if (playerTwo.checkMove(5) === true) {
-                    changeTile(playerTwo, 5, "O");
-                    checkWin(playerTwo);
-                };
-            };
+            playerTurn(5);
         });
         tile6.addEventListener("click", () => {
-            if (moveCount%2 === 1) {
-                if (playerOne.checkMove(6) === true) {
-                    changeTile(playerOne, 6, "X");
-                    checkWin(playerOne);
-                };
-            } else {
-                if (playerTwo.checkMove(6) === true) {
-                    changeTile(playerTwo, 6, "O");
-                    checkWin(playerTwo);
-                };
-            };
+            playerTurn(6);
         });
         tile7.addEventListener("click", () => {
-            if (moveCount%2 === 1) {
-                if (playerOne.checkMove(7) === true) {
-                    changeTile(playerOne, 7, "X");
-                    checkWin(playerOne);
-                };
-            } else {
-                if (playerTwo.checkMove(7) === true) {
-                    changeTile(playerTwo, 7, "O");
-                    checkWin(playerTwo);
-                };
-            };
+            playerTurn(7);
         });
         tile8.addEventListener("click", () => {
-            if (moveCount%2 === 1) {
-                if (playerOne.checkMove(8) === true) {
-                    changeTile(playerOne, 8, "X");
-                    checkWin(playerOne);
-                };
-            } else {
-                if (playerTwo.checkMove(8) === true) {
-                    changeTile(playerTwo, 8, "O");
-                    checkWin(playerTwo);
-                };
-            };
+            playerTurn(8);
         });
 
         const turnDisplay = document.getElementById("turnDisplay");
@@ -268,54 +202,68 @@ function createGame() {
     function checkWin(player) {
 
         let marker = player.getMarker();
-        let noWin = true;
 
         // check rows
         if (gameBoard[0] === marker && gameBoard[1] ===  marker && gameBoard[2] === marker) {
-            alert(player.getName() + " wins!")
             noWin = false;
-            return true
         } else if (gameBoard[3] === marker && gameBoard[4] ===  marker && gameBoard[5] === marker) {
-            alert(player.getName() + " wins!")
             noWin = false;
-            return true
         } else if (gameBoard[6] === marker && gameBoard[7] ===  marker && gameBoard[8] === marker) {
-            alert(player.getName() + " wins!")
             noWin = false;
-            return true
         };
 
         // check columns
         if (gameBoard[0] === marker && gameBoard[3] ===  marker && gameBoard[6] === marker) {
-            alert(player.getName() + " wins!")
             noWin = false;
-            return true
         } else if (gameBoard[1] === marker && gameBoard[4] ===  marker && gameBoard[7] === marker) {
-            alert(player.getName() + " wins!")
             noWin = false;
-            return true
         } else if (gameBoard[2] === marker && gameBoard[5] ===  marker && gameBoard[8] === marker) {
-            alert(player.getName() + " wins!")
             noWin = false;
-            return true
         };
 
         // check diagonals 
         if (gameBoard[0] === marker && gameBoard[4] ===  marker && gameBoard[8] === marker) {
-            alert(player.getName() + " wins!")
             noWin = false;
-            return true
         } else if (gameBoard[2] === marker && gameBoard[4] ===  marker && gameBoard[6] === marker) {
-            alert(player.getName() + " wins!")
             noWin = false;
-            return true
         };
+
+        if (noWin === false) {
+            player.addWin();
+            // alert(player.getName() + " wins and has won " + player.getWinCount() + " time(s)")
+            displayWinner(player);
+            moveCount = 10;
+            return true
+        }
 
         if (moveCount === 10 && noWin === true) {
             alert("its a tie")
             return true
         }
     };
+
+    // Function to perform every time tile is clicked
+    function playerTurn(tile) {
+        if (moveCount%2 === 1) {
+            if (playerOne.checkMove(tile) === true && noWin === true) {
+                changeTile(playerOne, tile, "X");
+                checkWin(playerOne);
+            };
+        } else {
+            if (playerTwo.checkMove(tile) === true && noWin === true) {
+                changeTile(playerTwo, tile, "O");
+                checkWin(playerTwo);
+            };
+        };
+    };
+
+    // display result in turnDisplay
+    function displayWinner(player) {
+
+        const turnDisplay = document.getElementById("turnDisplay");
+        turnDisplay.textContent = `${player.getName()} Wins!`;
+    };
+
 };
 
 // Create game when "New Game" is pressed
