@@ -67,9 +67,9 @@ function createGame() {
     const playAgain = document.createElement("button");
     playAgain.setAttribute("id", "playAgain");
     playAgain.textContent = "Play Again";
-    buttonsContainer.appendChild(playAgain);
-    playAgain.addEventListener("click", playAnotherGame);
 
+    const playerOneScore = document.createElement("div");
+    const playerTwoScore = document.createElement("div");
 
     const inputForm = document.createElement("form");
     // inputForm.setAttribute("id", "gameDataForm")
@@ -88,6 +88,11 @@ function createGame() {
     inputForm.appendChild(nameButton);
     inputContainer.appendChild(inputForm);
 
+    buttonsContainer.appendChild(playerOneScore);
+    buttonsContainer.appendChild(playAgain);
+    buttonsContainer.appendChild(playerTwoScore);
+    playAgain.addEventListener("click", playAnotherGame);
+
     // reset gameBoard
     function playAnotherGame() {
 
@@ -98,7 +103,9 @@ function createGame() {
             noWin = true;
             gameStatus = 0;
             moveCount = 1;
-        }
+            const turnDisplay = document.getElementById("turnDisplay");
+            turnDisplay.textContent = `${playerOne.getName()}'s turn`;
+        };
     };
 
     // Check to write to playerOne or playerTwo
@@ -115,6 +122,8 @@ function createGame() {
         } else if (gameStatus === 1) {
             let playerTwoName = nameTwoInput.value;
             playerTwo = player(playerTwoName, "Y");
+            playerOneScore.textContent = `${playerOne.getName()}: ${playerOne.getWinCount()}`;
+            playerTwoScore.textContent = `${playerTwo.getName()}: ${playerTwo.getWinCount()}`;
             gameStatus++;
         };
     };
@@ -262,6 +271,8 @@ function createGame() {
 
         const turnDisplay = document.getElementById("turnDisplay");
         turnDisplay.textContent = `${player.getName()} Wins!`;
+        playerOneScore.textContent = `${playerOne.getName()}: ${playerOne.getWinCount()}`;
+        playerTwoScore.textContent = `${playerTwo.getName()}: ${playerTwo.getWinCount()}`;
     };
 
 };

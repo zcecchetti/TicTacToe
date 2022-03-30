@@ -81,6 +81,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 50px;
 }
 
 #footer {
@@ -149,6 +150,7 @@ button:active {
     border: 0;
     font-size: inherit;
     display: flex;
+    gap: 8px;
 }
 
 form>input {
@@ -162,6 +164,11 @@ form>input {
     color: inherit;
 }
 
+form>input:focus {
+
+    outline:4px solid #443742;
+}
+
 form>button {
 
     height: 100%;
@@ -171,14 +178,6 @@ form>button {
     color: inherit;
     font-size: inherit;
     text-align: center;
-}
-
-
-
-#info>input:active {
-
-    
-    border: 0 ;
 }
 
 #turnDisplay {
