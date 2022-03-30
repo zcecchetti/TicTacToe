@@ -237,18 +237,18 @@ function createGame() {
             noWin = false;
         };
 
+        if (moveCount === 10 && noWin === true) {
+            displayTie();
+            return true
+        };
+
         if (noWin === false) {
             player.addWin();
-            // alert(player.getName() + " wins and has won " + player.getWinCount() + " time(s)")
             displayWinner(player);
             moveCount = 10;
             return true
-        }
+        };
 
-        if (moveCount === 10 && noWin === true) {
-            alert("its a tie")
-            return true
-        }
     };
 
     // Function to perform every time tile is clicked
@@ -273,6 +273,13 @@ function createGame() {
         turnDisplay.textContent = `${player.getName()} Wins!`;
         playerOneScore.textContent = `${playerOne.getName()}: ${playerOne.getWinCount()}`;
         playerTwoScore.textContent = `${playerTwo.getName()}: ${playerTwo.getWinCount()}`;
+    };
+
+    // display tie
+    function displayTie() {
+
+        const turnDisplay = document.getElementById("turnDisplay");
+        turnDisplay.textContent = `Tie Game!`;
     };
 
 };
