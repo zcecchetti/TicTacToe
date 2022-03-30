@@ -52,6 +52,7 @@ function createGame() {
     let gameStatus = 0;
 
     const inputForm = document.createElement("form");
+    // inputForm.setAttribute("id", "gameDataForm")
     const nameOneInput = document.createElement("input");
     nameOneInput.setAttribute("placeholder", "Player One Name");
     nameOneInput.setAttribute("maxlength", "20");
@@ -91,47 +92,47 @@ function createGame() {
 
         checkPlayer();
         if (gameStatus === 2) {
+            inputContainer.removeChild(inputForm);
+            const turnDisplay = document.createElement("div");
+            turnDisplay.setAttribute("id", "turnDisplay");
+            inputContainer.appendChild(turnDisplay);
             playerRounds(playerOne, playerTwo);
         }
     });
 
-
-
-
-    // let playerName;
-    // nameOneButton.addEventListener("click", () => {
-           
-    // playerName = nameOneInput.value;
-    // const playerOne = player(playerName, "X");
-    // console.log(playerOne.getMarker());
-    // })
-    
-
-    // const playerTwoName = prompt("player 2's name? ");
-    // const playerTwo = player(playerTwoName, "Y");
     function playerRounds(playerOne, playerTwo) {
 
-    for (moveCount = 0; moveCount < 8;) {
 
-        let playerOneMove = prompt("where do you want to place your marker? ");
-     
+        for (moveCount = 0; moveCount < 8;) {
+
+            let tileChanged;
+            const turnDisplay = document.getElementById("turnDisplay");
+            turnDisplay.textContent = `${playerOne.getName()}'s turn`;
+
+            let playerOneMove = prompt("where do you want to place your marker? ");
+        
             while (!playerOne.checkMove(playerOneMove)) {
                 playerOneMove = prompt("where do you want to change your marker to? ");
-            };
+                };
             playerOne.makeMove(playerOneMove);
+            tileChanged = document.getElementById("tile"+playerOneMove);
+            tileChanged.textContent = "X"
             moveCount++;
             console.log(moveCount);
-     
+
+            turnDisplay.textContent = `${playerTwo.getName()}'s turn`;
+        
             let playerTwoMove = prompt("where do you want to place your marker ");
             while (!playerTwo.checkMove(playerTwoMove)) {
                 playerTwoMove = prompt("where do you want to change your marker to? ");
             };
             playerTwo.makeMove(playerTwoMove);
+            tileChanged = document.getElementById("tile"+playerTwoMove);
+            tileChanged.textContent = "O"
             moveCount++;
             console.log(moveCount);
         };
     };
-    
 };
 
 // Create game when "New Game" is pressed
