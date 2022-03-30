@@ -268,39 +268,53 @@ function createGame() {
     function checkWin(player) {
 
         let marker = player.getMarker();
+        let noWin = true;
 
         // check rows
         if (gameBoard[0] === marker && gameBoard[1] ===  marker && gameBoard[2] === marker) {
             alert(player.getName() + " wins!")
+            noWin = false;
             return true
         } else if (gameBoard[3] === marker && gameBoard[4] ===  marker && gameBoard[5] === marker) {
             alert(player.getName() + " wins!")
+            noWin = false;
             return true
         } else if (gameBoard[6] === marker && gameBoard[7] ===  marker && gameBoard[8] === marker) {
             alert(player.getName() + " wins!")
+            noWin = false;
             return true
         };
 
         // check columns
         if (gameBoard[0] === marker && gameBoard[3] ===  marker && gameBoard[6] === marker) {
             alert(player.getName() + " wins!")
+            noWin = false;
             return true
         } else if (gameBoard[1] === marker && gameBoard[4] ===  marker && gameBoard[7] === marker) {
             alert(player.getName() + " wins!")
+            noWin = false;
             return true
         } else if (gameBoard[2] === marker && gameBoard[5] ===  marker && gameBoard[8] === marker) {
             alert(player.getName() + " wins!")
+            noWin = false;
             return true
         };
 
         // check diagonals 
         if (gameBoard[0] === marker && gameBoard[4] ===  marker && gameBoard[8] === marker) {
             alert(player.getName() + " wins!")
+            noWin = false;
             return true
         } else if (gameBoard[2] === marker && gameBoard[4] ===  marker && gameBoard[6] === marker) {
             alert(player.getName() + " wins!")
+            noWin = false;
             return true
         };
+
+        if (moveCount === 10 && noWin === true) {
+            alert("its a tie")
+            return true
+        }
     };
 };
 
