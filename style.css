@@ -57,6 +57,7 @@ body {
     display: grid;
     justify-items: center;
     align-items: center;
+    font-size: 8rem;
 }
 
 .gameTile:hover {
