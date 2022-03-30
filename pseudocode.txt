@@ -6,14 +6,14 @@ choice to use for game status checks
 
 write a function that checks for the current status of the game - when each player
 makes a move the function should check several conditions to determine if a player
-has won, or if its a catscratch
+has won, or if its a tie
 
     this function will work by being comprised of three smaller functions:
 
         checkRows function
         checkColummns function
         checkDiagonals function
-        checkCatscratch function
+        checkTie function
 
     if all of these return false, then game continues to next players turn
     if one function returns true, the result will be displayed and the winners

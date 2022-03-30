@@ -7,6 +7,10 @@ const player = (playerName, marker) => {
     const getMarker = () => marker;
     const getWinCount = () => winCount;
 
+    const addWin = () => {
+        winCount++;
+    };
+
     const makeMove = x => {
 
         gameBoard[x] = marker; 
@@ -21,7 +25,7 @@ const player = (playerName, marker) => {
             return false
         };
     };  
-    return {getName, getMarker, getWinCount, makeMove, checkMove};
+    return {getName, getMarker, getWinCount, makeMove, checkMove, addWin};
 }
 
 const gameBoard = (function() {
@@ -51,6 +55,9 @@ const gameBoard = (function() {
 function createGame() {
 
     let gameStatus = 0;
+    let moveCount = 1;
+    let playerOne;
+    let playerTwo;
 
     const inputForm = document.createElement("form");
     // inputForm.setAttribute("id", "gameDataForm")
@@ -87,8 +94,6 @@ function createGame() {
         };
     };
 
-    let playerOne;
-    let playerTwo;
     nameButton.addEventListener("click", () => {
 
         checkPlayer();
@@ -100,8 +105,7 @@ function createGame() {
             playerRounds(playerOne, playerTwo);
         }
     });
-
-    let moveCount = 1;
+    
     function playerRounds(playerOne, playerTwo) {
 
         /* find each tic tac toe space, kept in this function so the user can only
@@ -117,19 +121,17 @@ function createGame() {
         const tile7 = document.getElementById("tile7");
         const tile8 = document.getElementById("tile8");
 
-        let playerOneMove;
-        let playerTwoMove;
-        let tileChanged;
-
         tile0.addEventListener("click", () => {
             
             if (moveCount%2 === 1) {
                 if (playerOne.checkMove(0) === true) {
                     changeTile(playerOne, 0, "X");
+                    checkWin(playerOne);
                 };
             } else {
                 if (playerTwo.checkMove(0) === true) {
                     changeTile(playerTwo, 0, "O");
+                    checkWin(playerTwo);
                 };
             };
         });
@@ -137,10 +139,12 @@ function createGame() {
             if (moveCount%2 === 1) {
                 if (playerOne.checkMove(1) === true) {
                     changeTile(playerOne, 1, "X");
+                    checkWin(playerOne);
                 };
             } else {
                 if (playerTwo.checkMove(1) === true) {
                     changeTile(playerTwo, 1, "O");
+                    checkWin(playerTwo);
                 };
             };
         });
@@ -148,10 +152,12 @@ function createGame() {
             if (moveCount%2 === 1) {
                 if (playerOne.checkMove(2) === true) {
                     changeTile(playerOne, 2, "X");
+                    checkWin(playerOne);
                 };
             } else {
                 if (playerTwo.checkMove(2) === true) {
                     changeTile(playerTwo, 2, "O");
+                    checkWin(playerTwo);
                 };
             };
         });
@@ -159,10 +165,12 @@ function createGame() {
             if (moveCount%2 === 1) {
                 if (playerOne.checkMove(3) === true) {
                     changeTile(playerOne, 3, "X");
+                    checkWin(playerOne);
                 };
             } else {
                 if (playerTwo.checkMove(3) === true) {
                     changeTile(playerTwo, 3, "O");
+                    checkWin(playerTwo);
                 };
             };
         });
@@ -170,10 +178,12 @@ function createGame() {
             if (moveCount%2 === 1) {
                 if (playerOne.checkMove(4) === true) {
                     changeTile(playerOne, 4, "X");
+                    checkWin(playerOne);
                 };
             } else {
                 if (playerTwo.checkMove(4) === true) {
                     changeTile(playerTwo, 4, "O");
+                    checkWin(playerTwo);
                 };
             };
         });
@@ -181,10 +191,12 @@ function createGame() {
             if (moveCount%2 === 1) {
                 if (playerOne.checkMove(5) === true) {
                     changeTile(playerOne, 5, "X");
+                    checkWin(playerOne);
                 };
             } else {
                 if (playerTwo.checkMove(5) === true) {
                     changeTile(playerTwo, 5, "O");
+                    checkWin(playerTwo);
                 };
             };
         });
@@ -192,10 +204,12 @@ function createGame() {
             if (moveCount%2 === 1) {
                 if (playerOne.checkMove(6) === true) {
                     changeTile(playerOne, 6, "X");
+                    checkWin(playerOne);
                 };
             } else {
                 if (playerTwo.checkMove(6) === true) {
                     changeTile(playerTwo, 6, "O");
+                    checkWin(playerTwo);
                 };
             };
         });
@@ -203,10 +217,12 @@ function createGame() {
             if (moveCount%2 === 1) {
                 if (playerOne.checkMove(7) === true) {
                     changeTile(playerOne, 7, "X");
+                    checkWin(playerOne);
                 };
             } else {
                 if (playerTwo.checkMove(7) === true) {
                     changeTile(playerTwo, 7, "O");
+                    checkWin(playerTwo);
                 };
             };
         });
@@ -214,10 +230,12 @@ function createGame() {
             if (moveCount%2 === 1) {
                 if (playerOne.checkMove(8) === true) {
                     changeTile(playerOne, 8, "X");
+                    checkWin(playerOne);
                 };
             } else {
                 if (playerTwo.checkMove(8) === true) {
                     changeTile(playerTwo, 8, "O");
+                    checkWin(playerTwo);
                 };
             };
         });
@@ -244,17 +262,44 @@ function createGame() {
         } else if (moveCount%2 === 0) {
             turnDisplay.textContent = `${playerTwo.getName()}'s turn`;
         };
-    }
+    };
 
-    function checkSelected(tile, player, playerMove) {
+    // check if either player has won the game
+    function checkWin(player) {
 
-        if (tile.classList === "unselected") {
-            tile.classList.add("selected");
-            tile.classList.remove("unselected");
-            player.makeMove(playerMove);
-            return true;
-        } else if (tile.classList === "selected") {
-            return false;
+        let marker = player.getMarker();
+
+        // check rows
+        if (gameBoard[0] === marker && gameBoard[1] ===  marker && gameBoard[2] === marker) {
+            alert(player.getName() + " wins!")
+            return true
+        } else if (gameBoard[3] === marker && gameBoard[4] ===  marker && gameBoard[5] === marker) {
+            alert(player.getName() + " wins!")
+            return true
+        } else if (gameBoard[6] === marker && gameBoard[7] ===  marker && gameBoard[8] === marker) {
+            alert(player.getName() + " wins!")
+            return true
+        };
+
+        // check columns
+        if (gameBoard[0] === marker && gameBoard[3] ===  marker && gameBoard[6] === marker) {
+            alert(player.getName() + " wins!")
+            return true
+        } else if (gameBoard[1] === marker && gameBoard[4] ===  marker && gameBoard[7] === marker) {
+            alert(player.getName() + " wins!")
+            return true
+        } else if (gameBoard[2] === marker && gameBoard[5] ===  marker && gameBoard[8] === marker) {
+            alert(player.getName() + " wins!")
+            return true
+        };
+
+        // check diagonals 
+        if (gameBoard[0] === marker && gameBoard[4] ===  marker && gameBoard[8] === marker) {
+            alert(player.getName() + " wins!")
+            return true
+        } else if (gameBoard[2] === marker && gameBoard[4] ===  marker && gameBoard[6] === marker) {
+            alert(player.getName() + " wins!")
+            return true
         };
     };
 };
